@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#2259d6"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default">
+<link rel="manifest" href="manifest.webmanifest"><link rel="stylesheet" href="styles.css">
+<title>PDF Reader Translator</title>
+</head>
+<body>
+<header class="topbar">
+ <div class="brand"><div class="logo">文</div><div><h1>PDF Reader</h1><p id="fileLabel">Pembaca & penerjemah</p></div></div>
+ <div class="toolbar">
+  <label class="file-button">Buka PDF<input id="fileInput" type="file" accept="application/pdf,.pdf"></label>
+  <button id="prevPage" class="small" disabled>←</button><span id="pageStatus">0 / 0</span><button id="nextPage" class="small" disabled>→</button>
+  <button id="zoomOut" class="small" aria-label="Perkecil">−</button><button id="zoomIn" class="small" aria-label="Perbesar">+</button>
+ </div>
+</header>
+<div class="layout">
+ <main class="reader-main">
+  <section id="welcome" class="welcome"><div class="welcome-icon">PDF</div><h2>Mulai membaca buku Anda</h2><p>Pilih PDF dari iPad atau komputer. Pilih teks dengan mouse atau sentuhan jari untuk menerjemahkannya otomatis.</p><label class="file-button large">Pilih file PDF<input id="welcomeFile" type="file" accept="application/pdf,.pdf"></label><p class="hint">PDF diproses di perangkat Anda. File tidak diunggah ke server aplikasi.</p></section>
+  <div id="documentArea" class="document-area" hidden><div id="pages"></div></div>
+ </main>
+ <aside class="sidebar">
+  <nav class="tabs"><button class="tab active" data-tab="translate">Terjemahan</button><button class="tab" data-tab="favorites">Favorit</button><button class="tab" data-tab="history">Riwayat</button><button class="tab" data-tab="settings">Pengaturan</button></nav>
+  <section id="tab-translate" class="tab-panel">
+   <div class="selection-label">Teks pilihan</div><div id="selectedText" class="selected-text">Pilih kata atau kalimat pada PDF.</div>
+   <div class="translation-box"><div class="selection-label">Hasil terjemahan otomatis</div><div id="translationText" class="translation-text">Terjemahan akan muncul di sini.</div></div>
+   <div class="action-row"><button id="speakBtn" class="secondary" disabled>🔊 Dengarkan</button><button id="copyBtn" class="secondary" disabled>Salin</button><button id="favoriteBtn" class="secondary" disabled>☆ Favorit</button></div>
+   <div id="status" class="status"></div>
+  </section>
+  <section id="tab-favorites" class="tab-panel" hidden><h2>Kosakata favorit</h2><div id="favoritesList" class="saved-list"></div></section>
+  <section id="tab-history" class="tab-panel" hidden><h2>Riwayat terjemahan</h2><button id="clearHistory" class="text-button">Hapus riwayat</button><div id="historyList" class="saved-list"></div></section>
+  <section id="tab-settings" class="tab-panel" hidden>
+   <h2>Bahasa & terjemahan</h2>
+   <label for="source">Bahasa sumber</label><select id="source"><option value="en">Inggris</option><option value="id">Indonesia</option><option value="es">Spanyol</option><option value="fr">Prancis</option><option value="de">Jerman</option><option value="it">Italia</option><option value="pt">Portugis</option><option value="ru">Rusia</option><option value="ja">Jepang</option><option value="zh-CN">Mandarin</option></select>
+   <label for="target">Terjemahkan ke</label><select id="target"><option value="id">Bahasa Indonesia</option><option value="en">Inggris</option><option value="es">Spanyol</option><option value="fr">Prancis</option><option value="de">Jerman</option><option value="it">Italia</option><option value="pt">Portugis</option><option value="ru">Rusia</option><option value="ja">Jepang</option><option value="zh-CN">Mandarin</option></select>
+   <label for="provider">Layanan terjemahan</label><select id="provider"><option value="mymemory">MyMemory (tanpa API key, ada batas)</option><option value="libretranslate">LibreTranslate publik (bisa tidak tersedia)</option></select>
+   <button id="saveSettings" class="primary full">Simpan pengaturan</button>
+   <p class="hint">Teks yang dipilih dikirim ke penyedia terjemahan pihak ketiga. Jangan kirim teks rahasia. Penyimpanan lokal tidak otomatis tersinkron antara iPad dan Mac.</p>
+  </section>
+ </aside>
+</div>
+<div id="selectionPopup" class="selection-popup" hidden>
+ <div class="popup-heading">Terjemahan otomatis</div><div id="popupSelection" class="popup-selection"></div>
+ <div id="popupTranslation" class="popup-translation">Menerjemahkan…</div>
+ <button id="popupOpenPanel" class="popup-link">Lihat detail di panel</button>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script><script src="app.js"></script>
+</body></html>

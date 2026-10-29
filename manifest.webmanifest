@@ -1,0 +1,10 @@
+{
+  "name": "PDF Reader Translator",
+  "short_name": "PDF Translate",
+  "description": "Pembaca PDF dengan terjemahan otomatis, favorit, riwayat, dan pengucapan.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#eef1f6",
+  "theme_color": "#2259d6",
+  "icons": []
+}
